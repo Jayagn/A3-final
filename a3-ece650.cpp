@@ -61,7 +61,7 @@ int main(int argc, char **argv)
 
         char *arg1[3];
         arg1[0]= (char*)"python";
-        arg1[1]=(char*)"a1-ece650.py";
+        arg1[1]=(char*)"ece650-a1.py";
         arg1[2]=nullptr;
         // redirect stdin from the pipe
         dup2(pipe_from_rgen_to_a1[0],STDIN_FILENO);
@@ -90,7 +90,7 @@ int main(int argc, char **argv)
         dup2(pipe_from_a1_to_a2[0],STDIN_FILENO);
         close(pipe_from_a1_to_a2[1]);
         close(pipe_from_a1_to_a2[0]);
-        execv("a2-ece650",argv);
+        execv("ece650-a2",argv);
         perror("Error: execution of a2-ece650 failed");
         return 1;
     }
