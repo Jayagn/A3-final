@@ -10,7 +10,6 @@
 #include<cstdlib>
 #include<vector>
 #include<utility>
-#include<windows.h>
 #include<time.h>
 
 using namespace std;
@@ -129,8 +128,8 @@ bool intersect(vector<int> vect, int x, int y, int j)
 int main (int argc, char **argv)
 {
     srand(time(0));
-    ofstream outfile;
-    outfile.open("out.txt");
+    //ofstream outfile;
+    //outfile.open("out.txt");
     int s_flag,n_flag = 0;
     int l_flag,c_flag = 0;
     string s_v,n_v,l_v,c_v;
@@ -138,7 +137,7 @@ int main (int argc, char **argv)
     int n_segments = 5;
     int c_positive = 20;
     int c_negative = 20*(-1);
-    int sleep_time = 5*(1000);
+    int sleep_time = 5;
     int x_coor[500];
     int y_coor[500];
     static constexpr char Random_char[] = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -181,7 +180,7 @@ int main (int argc, char **argv)
             l_v = optarg;
             int l1;
             l1 = atoi(l_v.c_str());
-            sleep_time = l1*1000;
+            sleep_time = l1;
             if(l1 < 5){
                 std::cerr<<"Error: -l must have value greater than or equal to 5"<<std::endl;
                 return 1;
@@ -224,16 +223,17 @@ int main (int argc, char **argv)
         int counter;
         int inter_flag;
         int flag_street_intersect;
+		flag_street_intersect = 0;
 
         for (int i=0;i<random_street;i++)
         {
-
+			counter = 0;
             random_linesegment = (rand()% (n_segments - 1 + 1)) + 1;
             Array1[i] = Random_char[rand()%(sizeof(Random_char)-1)]  ;
             Array2[i] = Random_char[rand()%(sizeof(Random_char)-1)]  ;
             Array3[i] = Random_char[rand()%(sizeof(Random_char)-1)]  ;
             cout<<"a"<<" "<<'"'<<Array1[i]<<Array2[i]<<Array3[i]<<'"';
-            outfile<<"a"<<" "<<'"'<<Array1[i]<<Array2[i]<<Array3[i]<<'"';
+            //outfile<<"a"<<" "<<'"'<<Array1[i]<<Array2[i]<<Array3[i]<<'"';
             vector<int> vect2;
 
             if(i==random_street-1)
@@ -281,7 +281,7 @@ int main (int argc, char **argv)
 
                                 y_coor[j] = (rand()%(c_positive - c_negative + 1)) + c_negative;
 
-                                if(true/*overlap(myVector,temp)*/)
+                                if(true)
                                 {
                                     vect2.push_back(x_coor[j]);
                                     vect2.push_back(y_coor[j]);
@@ -311,7 +311,7 @@ int main (int argc, char **argv)
                 for(int j=0;j<random_linesegment+1;j++)
                 {
                     cout<<" "<<"("<<x_coor[j]<<","<<y_coor[j]<<")";
-                    outfile<<" "<<"("<<x_coor[j]<<","<<y_coor[j]<<")";
+                    //outfile<<" "<<"("<<x_coor[j]<<","<<y_coor[j]<<")";
                 }
             }
             else{
@@ -326,7 +326,7 @@ int main (int argc, char **argv)
 
                             y_coor[j] = (rand()%(c_positive - c_negative + 1)) + c_negative;
 
-                            if(true/*intersect(temp,Arrayx[j],Arrayy[j],j) && overlap(myVector,temp)*/)
+                            if(true)
                             {
                                 vect2.push_back(x_coor[j]);
                                 vect2.push_back(y_coor[j]);
@@ -343,7 +343,7 @@ int main (int argc, char **argv)
 
                             y_coor[j] = (rand()%(c_positive - c_negative + 1)) + c_negative;
 
-                            if(true/*overlap(myVector,temp)*/)
+                            if(true)
                             {
                                 vect2.push_back(x_coor[j]);
                                 vect2.push_back(y_coor[j]);
@@ -363,7 +363,7 @@ int main (int argc, char **argv)
                     //pair<int,int> pairs = make_pair(Arrayx[j],Arrayy[j]);
                     //cout<<" "<<pairs.first<<" "<<pairs.second;
                     cout<<" "<<"("<<x_coor[j]<<","<<y_coor[j]<<")";
-                    outfile<<" "<<"("<<x_coor[j]<<","<<y_coor[j]<<")";
+                    //outfile<<" "<<"("<<x_coor[j]<<","<<y_coor[j]<<")";
                 }
                 if(!flag_street_intersect && i!=0)
                 {
@@ -376,17 +376,17 @@ int main (int argc, char **argv)
 
             myVector.push_back(vect2);
             cout<<endl;
-            outfile<<endl;
+           // outfile<<endl;
         }
 
         cout<<"g"<<endl;
-        outfile<<"g"<<endl;
-
-Sleep(sleep_time);
+        //outfile<<"g"<<endl;
+sleep_time =(rand()%(sleep_time-5+1))+5;
+sleep(sleep_time);
 for(int i=0;i<random_street;i++)
 {
     cout<<"r"<<" "<<'"'<<Array1[i]<<Array2[i]<<Array3[i]<<'"'<<endl;
-    outfile<<"r"<<" "<<'"'<<Array1[i]<<Array2[i]<<Array3[i]<<'"'<<endl;
+    //outfile<<"r"<<" "<<'"'<<Array1[i]<<Array2[i]<<Array3[i]<<'"'<<endl;
 }
 
 
@@ -397,6 +397,6 @@ for(int i=0;i<myVector.size();i++){
 
     }
 
-
+return 0;
 }
 
