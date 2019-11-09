@@ -72,7 +72,7 @@ void Shortest_Distance(vector<int> adj[], int s,
 
     if (!Breath_First_Search(adj, s, dest, v, pre, dist))
     {
-        cout << "Error: Path does not exist between given vertexes"<<endl;
+        std::cerr << "Error: Path does not exist between given vertexes"<<std::endl;
         for(int i=0;i<MAX;i++){
             adj[i].clear();
         }
@@ -159,7 +159,7 @@ int main(){
             while (getline(f, s, ','))
             {
                 if (stoi(s) >= vertices)
-                { cout<<"Error: Vertex mentioned in edge is greater than number of vertices."<<endl;
+                { std::cerr<<"Error: Vertex mentioned in edge is greater than number of vertices."<<std::endl;
                     for(int i=0;i<MAX;i++){
                         adj[i].clear();
                     }
